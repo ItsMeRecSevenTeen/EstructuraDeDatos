@@ -1,0 +1,183 @@
+#include<iostream>
+#include<time.h>
+#include<stdlib.h>
+using namespace std;
+
+void imprime(int[]);
+int iniManual(int[], int);
+int iniAleatoria(int[], int);
+int iniN(int[], int, int);
+int ini1aN(int[], int);
+int iniPares(int[], int);
+int iniPosyNegs(int[], int);
+
+int main()
+{
+	int datos[20]={0}, opc, upos=-1, n, v;
+	
+	while(1){
+		cout<<"--------MENU--------\n";
+		cout<<"0. Impresion\n";
+		cout<<"1. Inicializacion manual\n";
+		cout<<"2. Inicializacion aleatoria\n";
+		cout<<"3. Inicializacion todos con N valor\n";
+		cout<<"4. Inicializacion de 1 a N\n";
+		cout<<"5. Inicializacion N pares\n";
+		cout<<"6. Inicializacion N positivos y negativos\n";
+		cout<<"Selecione una opcion: ";
+		cin>>opc;
+		
+		switch(opc)
+		{
+			case 0:
+				imprime(datos);
+				break;
+			case 1:
+				cout<<"Cuantos datos quieres inicializar?: ";
+				cin>>n;
+				upos=iniManual(datos,n);
+				break;
+			case 2:
+				cout<<"Cuantos datos quieres inicializar?: ";
+				cin>>n;
+				upos=iniAleatoria(datos,n);
+				break;
+			case 3:
+				cout<<"Cuantos datos quieres inicializar?: ";
+				cin>>n;
+				cout<<"Ingrese el valor: ";
+				upos=iniN(datos, n, v);
+				break;
+			case 4:
+				cout << "Cuantos datos quieres inicializar?: ";
+				cin >> n;
+				upos=ini1aN(datos, n);
+				break;
+			case 5:
+				cout << "Cuantos datos quieres inicializar?: ";
+				cin >> n;
+				upos=iniPares(datos, n);
+				break;
+			case 6:
+				cout << "Cuantos datos quieres inicializar?: ";
+				cin >> n;
+				upos=iniPosyNegs(datos, n);
+				break;
+		}
+	}
+}
+
+void imprime(int d[20])
+{
+	int i;
+	cout<<"Contenido del arreglo\n";
+	cout<<"Subindice	 Valor\n";
+	
+	for(i=0;i<20;i++)
+		cout<<"   "<<i<<"		"<<d[i]<<"\n";
+	
+}
+
+int iniManual(int d[20], int n)
+{
+	int i, up=-1;
+	
+	if(n>20)
+		cout<<"Se excede el tamaño del arreglo\n";
+	else
+	{
+		for(i=0;i<n;i++)
+		{
+			cout<<"Dato ["<<i<<"]: ";
+			cin>>d[i];
+		}
+		up=n-1;
+	}
+	return up;
+}
+
+int iniAleatoria(int d[20], int n)
+{
+	srand(time(NULL));
+	int i, up=-1;
+	
+	if(n>20)
+		cout<<"Se excede el tamaño del arreglo\n";
+	else
+	{
+		for(i=0;i<n;i++)
+		{
+			d[i]=1+rand()%100;
+		}
+		up=n-1;
+	}
+	return up;
+}
+
+int iniN(int d[20], int n, int v)
+{
+	int i, up;
+	
+	if(n>20)
+		cout<<"Se excede el tamaño del arreglo\n";
+	else
+	{
+		for(i=0;i<n;i++)
+			d[i]=v;
+	}
+	up=n-1;
+	return up;
+}
+int ini1aN(int d[20], int n){
+	int i, up;
+	
+	if(n>20)
+		cout<<"Se excede el tamaño del arreglo\n";
+	else
+	{
+		for(i=0;i<n;i++)
+			d[i]=i + 1;
+	}
+	up=n-1;
+	return up;
+}
+int iniPares(int d[20], int n){
+	int i, up, par;
+	srand(time(NULL));
+	if(n>20)
+		cout<<"Se excede el tamaño del arreglo\n";
+	else
+	{
+		i = 0;
+		while(i < n){
+			par = 1 + rand()%100;
+			if(par % 2 == 0){
+				d[i] = par;
+				i++;
+			}
+		}
+	}
+	up=n-1;
+	return up;
+}
+int iniPosyNegs(int d[20], int n){
+	int i, up, signo;
+	srand(time(NULL));
+	if(n>20)
+		cout<<"Se excede el tamaño del arreglo\n";
+	else
+	{
+		
+		for(i=0;i<n;i++){
+			signo = rand()%2;
+			if(signo == 0){
+				d[i]=1*(1+rand()%100);
+			}
+			else{
+				d[i]=-1*(1+rand()%100);
+			}
+		}
+	}
+	up=n-1;
+	return up;
+}
